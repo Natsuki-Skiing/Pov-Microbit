@@ -1,12 +1,13 @@
 namespace POV {
     //% block
     //% s.defl="hi"
-    export function showString(s: string) {
+    //%shim=extension::showString
+    export function showString(s: string):void {
 
     }
     //% block
-    //%shim=extension::init_display
+    //%shim=extension::initlizePov
     export function initlizePov(): void { 
-        basic.showString("POV Init");
+       
     }
 }
