@@ -26,6 +26,13 @@
 #define WINDOW_SIZE 20
 #define NUMBER_OF_SPACERS 3
 
+#define ROW_1 21
+#define ROW_2 22
+#define ROW_3 15
+#define ROW_4 24
+#define ROW_5 19
+#define COL_3 3
+
 // Setup Serial for debugging 
 NRF52Pin usbTx(ID_PIN_USBTX, MICROBIT_PIN_UART_TX, PIN_CAPABILITY_DIGITAL);
 NRF52Pin usbRx(ID_PIN_USBRX, MICROBIT_PIN_UART_RX, PIN_CAPABILITY_DIGITAL);
