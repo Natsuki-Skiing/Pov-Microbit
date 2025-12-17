@@ -83,7 +83,7 @@ int16_t PovAccelerometer::getX() {
 // };
 
 Pov::Pov(std::string message) {
-    
+    this->messagePending = false;
     updateMessage(message);
 
     rowMasks[0] = (1u << ROW_1);

@@ -9,7 +9,7 @@ namespace extension {
     static Pov* pPov = nullptr;
     void povFiberEntry(){
         if(pPov){
-            pPov->displayLoop();
+            pPov->displayPov();
         }
     }
 
