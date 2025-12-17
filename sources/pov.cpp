@@ -324,7 +324,7 @@ void Pov::updateMessage(std::string s) {
     this->messageIndexs.clear();
     getAlphaIndexes(Cmessage, s.length());
     this->messagePending = true;
-    displayPov();
+    
 }
 
 void Pov::clearLEDS() {
@@ -360,7 +360,7 @@ void Pov::setLEDS(std::vector<bool> colData) {
 
 void Pov::prepareWholeMessage() {
     this->messagePending = false;
-    this.wholeMessage.clear();
+    this->wholeMessage.clear();
     for(int index: this->messageIndexs){
         for(int col = 0; col < 5; col++) {
             std::vector<bool> columnData;
