@@ -1,17 +1,13 @@
 namespace POV {
     //% block
     //% s.defl="hi"
-    
+    //%shim=extension::showString
     export function showString(s: string):void {
-        if (typeof extension !== 'undefined') {
-            (extension as any).showString(s);
-        }
+        
     }
     //% block
-    
+    //%shim=extension::initPov
     export function initPov(): void { 
-        if (typeof extension !== 'undefined') {
-            (extension as any).initPov();
-        }
+       
     }
 }
