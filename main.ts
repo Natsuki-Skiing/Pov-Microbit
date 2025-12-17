@@ -5,5 +5,7 @@ namespace POV {
 
     }
     //% block
-    export function initlizePov() { }
+    export function initlizePov() { 
+        Basic.showString("POV Init");
+    }
 }
