@@ -6,7 +6,7 @@ using namespace pxt;
 using namespace codal;
 
 namespace extension { 
-    Pov* pPov = nullptr;
+    static Pov* pPov = nullptr;
     void povFiberEntry(){
         if(pPov){
             pPov->displayLoop();

@@ -3,7 +3,7 @@ namespace POV {
     //% s.defl="hi"
     //%shim=extension::showString
     export function showString(s: string):void {
-
+        
     }
     //% block
     //%shim=extension::initPov
