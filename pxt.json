@@ -12,10 +12,8 @@
         "POV.ts",
         "extension.cpp",
         "shims.d.ts",
-        "MicroBitDisplayCustom.cpp",
-        "MicroBitDisplayCustom.h",
-        "NRF52LedMatrixCustom.cpp",
-        "NRF52LedMatrixCustom.h",
+        "pov.cpp",
+        "pov.h",
         "README.md"
     ],
     "testFiles": [

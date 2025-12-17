@@ -33,7 +33,7 @@ DEALINGS IN THE SOFTWARE.
 #define NRF52_LED_MATRIX_CUSTOM_MAXIMUM_COLUMNS        5                   // The maximum number of LEDMatrix columns supported by the hardware.
 #define NRF52_LED_MATRIX_CUSTOM_LIGHTSENSE_STROBES     4                   // Multiple of strobe period to use for light sense
 
-
+sources/
 // TODO: Replace this with a resource allocated version
 #define NRF52_LEDMATRIX_CUSTOM_GPIOTE_CHANNEL_BASE     1
 #define NRF52_LEDMATRIX_CUSTOM_PPI_CHANNEL_BASE        3
@@ -49,7 +49,7 @@ namespace codal
     class NRF52LEDMatrixCustom : public Display
     {
         uint8_t strobeRow;                      // The current row being displayed.
-        uint8_t timeslots;                      // The total number of timeslots used by the driver (includes light sensing).
+        uint8_t timeslots;             sources/         // The total number of timeslots used by the driver (includes light sensing).
         DisplayMode mode;                       // The currnet display mode being used.
         bool enabled;                           // Whether or not the display is enabled.
         uint8_t rotation;                       // DisplayRotation
