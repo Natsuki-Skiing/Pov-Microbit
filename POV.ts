@@ -7,6 +7,6 @@ namespace POV {
     //% block
     //%shim=extension::init_display
     export function initlizePov(): void { 
-        Basic.showString("POV Init");
+        basic.showString("POV Init");
     }
 }
