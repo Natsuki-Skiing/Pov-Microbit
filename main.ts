@@ -10,4 +10,7 @@ namespace POV {
     export function showString(s: string) {
 
     }
+    //% block
+    //% weight=1 100
+    export function initlizePOV() { }
 }
