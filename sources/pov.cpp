@@ -6,46 +6,37 @@
 #include "CodalFiber.h"
 #include "nrf_delay.h" 
 #include "pov.h"
+
 #define SHAKE_THRESHOLD  12000   
 #define LETTER_DELAY_US  2000    
 #define SPACE_DELAY_US   8000    
 #define DARK_DELAY_US    200     
 
-
 #define PORT0_OUT       (*(volatile uint32_t *)0x50000504)
 #define PORT0_DIR       (*(volatile uint32_t *)0x50000514)
 
-
-
-// Accelaromiter 
+// Accelerometer 
 #define ACCEL_ADDR      (0x19 << 1) 
 #define CTRL_REG1_A     0x20
 #define OUT_X_L_A       0x28
 #define CMD_AUTO_INC    0x80
 
-//For longer messages, no shakes for the window to me moved 
 #define SHAKES_MOVE_WIN 1
 #define NO_LETTER -1
 #define WINDOW_SIZE 20
 #define NUMBER_OF_SPACERS 3
+
 // Setup Serial for debugging 
 NRF52Pin usbTx(ID_PIN_USBTX, MICROBIT_PIN_UART_TX, PIN_CAPABILITY_DIGITAL);
 NRF52Pin usbRx(ID_PIN_USBRX, MICROBIT_PIN_UART_RX, PIN_CAPABILITY_DIGITAL);
 NRF52Serial serial(usbTx, usbRx, NRF_UARTE0);
 
-class PovAccelerometer {
-private:
-    NRF52Pin i2cSdaInt{ID_PIN_SDA, MICROBIT_PIN_INT_SDA, PIN_CAPABILITY_DIGITAL};
-    NRF52Pin i2cSclInt{ID_PIN_SCL, MICROBIT_PIN_INT_SCL, PIN_CAPABILITY_DIGITAL};
-    NRF52I2C i2cInt{i2cSdaInt, i2cSclInt, NRF_TWIM0};
-    int16_t readAxis(uint8_t reg);
-
-public:
-    PovAccelerometer();
-    int16_t getX();
-};
-
-PovAccelerometer::PovAccelerometer() {
+// PovAccelerometer implementation
+PovAccelerometer::PovAccelerometer() : 
+    i2cSdaInt(ID_PIN_SDA, MICROBIT_PIN_INT_SDA, PIN_CAPABILITY_DIGITAL),
+    i2cSclInt(ID_PIN_SCL, MICROBIT_PIN_INT_SCL, PIN_CAPABILITY_DIGITAL),
+    i2cInt(i2cSdaInt, i2cSclInt, NRF_TWIM0)
+{
     i2cInt.setFrequency(100000);
     
     uint8_t config[] = {CTRL_REG1_A, 0x57};
@@ -64,26 +55,8 @@ int16_t PovAccelerometer::getX() {
     return readAxis(OUT_X_L_A);
 }
 
-// class Pov {
-// private:
-//     std::vector<int8_t> messageIndexs;
-//     std::vector<std::vector<bool>> wholeMessage;
-//     // Faster
-//     uint32_t rowMasks[5]; 
-
-
-//     void getAlphaIndexes(const char *, int);
-//     void setLEDS(std::vector<bool> );
-//     void clearLEDS();
-
-// public:
-//     Pov(std::string);
-//     void displayPov();
-//     PovAccelerometer povAccelerometer{};
-// };
-
-Pov::Pov(std::string message) {
-    this->messagePending = false;
+// Pov implementation
+Pov::Pov(std::string message) : povAccelerometer(), messagePending(false) {
     updateMessage(message);
 
     rowMasks[0] = (1u << ROW_1);
@@ -92,10 +65,8 @@ Pov::Pov(std::string message) {
     rowMasks[3] = (1u << ROW_4);
     rowMasks[4] = (1u << ROW_5);
 
-    
     PORT0_DIR |= (rowMasks[0] | rowMasks[1] | rowMasks[2] | rowMasks[3] | rowMasks[4] | (1u << COL_3));
     
-    // Start wil led off 
     clearLEDS();
 }
 
@@ -108,6 +79,7 @@ void Pov::getAlphaIndexes(const char* message, int length) {
         }
     }
 }
+
 void Pov::updateMessage(std::string s) {
     if(s.length() == 0) {
         return;
@@ -116,7 +88,6 @@ void Pov::updateMessage(std::string s) {
     this->messageIndexs.clear();
     getAlphaIndexes(Cmessage, s.length());
     this->messagePending = true;
-    
 }
 
 void Pov::clearLEDS() {
@@ -134,17 +105,15 @@ void Pov::clearLEDS() {
 void Pov::setLEDS(std::vector<bool> colData) {
     uint32_t output = PORT0_OUT;
     
-    
     output &= ~(rowMasks[0] | rowMasks[1] | rowMasks[2] | rowMasks[3] | rowMasks[4]);
     
-    // Set bits fro letter
+    // Set bits for letter
     if(colData[0]) output |= rowMasks[0];
     if(colData[1]) output |= rowMasks[1];
     if(colData[2]) output |= rowMasks[2];
     if(colData[3]) output |= rowMasks[3];
     if(colData[4]) output |= rowMasks[4];
 
-    
     output &= ~(1u << COL_3);
 
     PORT0_OUT = output;
@@ -153,6 +122,7 @@ void Pov::setLEDS(std::vector<bool> colData) {
 void Pov::prepareWholeMessage() {
     this->messagePending = false;
     this->wholeMessage.clear();
+    
     for(int index: this->messageIndexs){
         for(int col = 0; col < 5; col++) {
             std::vector<bool> columnData;
@@ -169,14 +139,12 @@ void Pov::prepareWholeMessage() {
 }
 
 void Pov::displayPov() {
-
     uint8_t messageLen;
     uint16_t msgNumberOfCols;
     uint8_t windowStart = 0;
 
     // number of shakes, used to time window movement
     int8_t noShakes = 0;
-
 
     while (true) {
         if(this->messagePending) {
@@ -186,59 +154,52 @@ void Pov::displayPov() {
             windowStart = 0;
             noShakes = 0;
         }
+        
         int16_t x = povAccelerometer.getX();
 
         // Left to right x >= SHAKE_THRESHOLD
         if (x <= -SHAKE_THRESHOLD) {
-            noShakes ++;
+            noShakes++;
             
             for (int index = 0; index < WINDOW_SIZE; index++) {
-                
-               
-              
-                setLEDS(wholeMessage.at(((windowStart +index) % msgNumberOfCols)));
+                setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
                 nrf_delay_us(LETTER_DELAY_US);
                 
                 // Ghosting reduction
                 clearLEDS(); 
                 nrf_delay_us(DARK_DELAY_US);
-                
-                //nrf_delay_us(SPACE_DELAY_US);
             }
-            
             
             clearLEDS();
             nrf_delay_ms(50); 
         } 
-        // left to right x <= -SHAKE_THRESHOLD
+        // right to left x <= -SHAKE_THRESHOLD
         else if (x >= SHAKE_THRESHOLD) {
-            noShakes ++;
+            noShakes++;
+            
             for (int index = WINDOW_SIZE; index >= 0; index--) {
-                
-                // columns  reverse order
-                setLEDS(wholeMessage.at(((windowStart +index) % msgNumberOfCols)));
+                // columns reverse order
+                setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
                 nrf_delay_us(LETTER_DELAY_US);
                 
                 // Ghosting reduction
                 clearLEDS(); 
-                
                 nrf_delay_us(DARK_DELAY_US);
-                
-                //nrf_delay_us(SPACE_DELAY_US);
             }
             
             clearLEDS();
             nrf_delay_ms(50);
         }
+        
         // Scroll text
         if(noShakes == SHAKES_MOVE_WIN && messageLen > 3){
-            windowStart ++;
-            if((windowStart)>msgNumberOfCols){
+            windowStart++;
+            if((windowStart) > msgNumberOfCols){
                 windowStart = 0;
             }
             noShakes = 0;
         }
+        
         nrf_delay_us(100); 
     }
 }
-
