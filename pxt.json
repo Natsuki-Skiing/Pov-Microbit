@@ -10,6 +10,7 @@
         "main.blocks",
         "main.ts",
         "POV.ts",
+        "extension.cpp",
         "README.md"
     ],
     "testFiles": [
