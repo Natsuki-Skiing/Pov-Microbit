@@ -7,7 +7,7 @@ namespace POV {
     }
     //% block
     //%shim=extension::initPov
-    export function initlizePov(): void { 
+    export function initPov(): void { 
        
     }
 }
