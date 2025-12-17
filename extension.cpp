@@ -5,7 +5,7 @@
 using namespace pxt;
 using namespace codal;
 
-namespace extension { 
+namespace POV{ 
 
     /**
      * Take over the default display.
