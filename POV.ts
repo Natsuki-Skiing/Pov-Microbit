@@ -3,11 +3,15 @@ namespace POV {
     //% s.defl="hi"
     
     export function showString(s: string):void {
-        (extension as any).showString(s);
+        if (typeof extension !== 'undefined') {
+            (extension as any).showString(s);
+        }
     }
     //% block
     
     export function initPov(): void { 
-        (extension as any).initPov();
+        if (typeof extension !== 'undefined') {
+            (extension as any).initPov();
+        }
     }
 }
