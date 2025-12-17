@@ -13,7 +13,7 @@ namespace extension {
         }
     }
 
-
+    //%
     void initPov(){
         uBit.display.disable();
         
@@ -23,7 +23,7 @@ namespace extension {
         }
     }
 
-
+    //%
     void showString(String message){
         if(pPov){
             pPov->updateMessage(message);
