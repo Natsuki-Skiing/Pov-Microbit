@@ -10,6 +10,6 @@ namespace POV {
     //% block
     //% shim=extension::initPov
     export function initPov(): void { 
-       
+       console.log("Simulator: POV initialized");
     }
 }
