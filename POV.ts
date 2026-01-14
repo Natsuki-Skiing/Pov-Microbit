@@ -1,5 +1,5 @@
 //% color=#bebb56 icon="\uf0eb"
-//% block=POV"
+//% block="POV"
 namespace POV {
     //% block
     //% s.defl="hi"
