@@ -7,6 +7,7 @@ using namespace codal;
 
 namespace extension { 
     static Pov* pPov = nullptr;
+    //%
     void povFiberEntry(){
         if(pPov){
             pPov->displayPov();
