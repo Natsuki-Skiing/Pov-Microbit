@@ -1,3 +1,5 @@
+//% color=#bebb56 icon="\uf0eb"
+//% block="Custom Extension"
 namespace POV {
     //% block
     //% s.defl="hi"
