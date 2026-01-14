@@ -1,6 +1,6 @@
 #include "pxt.h"
 #include "MicroBit.h"
-#include "MicroBitDisplayCustom.h"
+#include "pov.h"
 
 using namespace pxt;
 using namespace codal;
