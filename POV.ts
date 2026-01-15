@@ -1,10 +1,7 @@
 //% color=#bebb56 icon="\uf0eb" block="POV"
 namespace extension {
-    /**
-     * Initializes the POV hardware.
-     */
     //% blockId="extension_init_pov" block="init pov"
-    //% shim=extension::initPov
+    //% shim=extension::init_Pov
     export function initPov(): void { 
        // Simulator fallback
        console.log("Simulator: POV initialized");
@@ -15,7 +12,8 @@ namespace extension {
      */
     //% blockId="extension_show_string" block="show string %s"
     //% s.defl="hi"
-    //% shim=extension::showString
+    //% shim=extension::show_
+    // String
     export function showString(s: string): void {
         // Simulator fallback
         console.log("POV showing: " + s);

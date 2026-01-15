@@ -26,5 +26,12 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": ["blocksprj"],
+    "bundleddirs": [
+    "libs/core"
+    ],
+    "disablesVariants": [
+    "mbdal"
+    ],
+    "yotta": {} 
 }
