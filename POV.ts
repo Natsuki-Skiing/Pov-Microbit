@@ -12,7 +12,7 @@ namespace extension {
      */
     //% blockId="extension_show_string" block="show string %s"
     //% s.defl="hi"
-    //% shim=extension::show_
+    //% shim=extension::show_String
     // String
     export function showString(s: string): void {
         // Simulator fallback
