@@ -12,8 +12,8 @@
         "POV.ts",
         "extension.cpp",
         "shims.d.ts",
-        "pov.cpp",
-        "pov.h",
+        "sources/pov.cpp",
+        "sources/pov.h",
         "README.md"
     ],
     "testFiles": [
