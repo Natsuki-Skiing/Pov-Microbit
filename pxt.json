@@ -1,10 +1,8 @@
 {
-    "name": "MicrobitPov",
+    "name": "pxt-extension",
     "description": "",
     "dependencies": {
-        "core": "*",
-        "radio": "*",
-        "microphone": "*"
+        "core": "*"
     },
     "files": [
         "main.blocks",
@@ -17,7 +15,9 @@
         "README.md"
     ],
     "testFiles": [
-        "test.ts"
+        "test.ts",
+        "main.ts",
+        "main.blocks"
     ],
     "targetVersions": {
         "target": "8.0.18",
@@ -26,12 +26,15 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": ["blocksprj"],
+    "preferredEditor": "blocksprj",
     "bundleddirs": [
-    "libs/core"
+        "libs/core"
     ],
     "disablesVariants": [
-    "mbdal"
+        "mbdal"
     ],
-    "yotta": {} 
+    "yotta": {},
+    "simulator": {
+        "autoRun": true
+    }
 }
