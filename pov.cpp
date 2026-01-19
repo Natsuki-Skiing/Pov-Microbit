@@ -1,5 +1,4 @@
 #include "MicroBit.h"
-#include "samples/Tests.h"
 #include <vector>
 #include <string>
 #include <cstdint>
