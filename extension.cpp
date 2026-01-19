@@ -8,26 +8,31 @@ using namespace codal;
 namespace extension { 
     static Pov* pPov = nullptr;
     //%
-    void povFiberEntry(){
-        if(pPov){
-            pPov->displayPov();
-        }
-    }
-
     //%
-    void init_Pov(){
-        uBit.display.disable();
+    void povShowMessage(String message) {
+        if (povInstance) {
+            delete povInstance;
+        }
         
-        if(!pPov){
-            pPov = new Pov("");
-            create_fiber(povFiberEntry);
-        }
+        // Convert MakeCode string to C++ string
+        ManagedString ms(message);
+        std::string msg = std::string(ms.toCharArray());
+        
+        povInstance = new Pov(msg);
+        
+        // Run displayPov in a fiber so it doesn't block
+        create_fiber([](void* arg) {
+            if (povInstance) {
+                povInstance->displayPov();
+            }
+        });
     }
-
     //%
-    void show_String(String message){
-        if(pPov){
-            pPov->updateMessage(message);
+    void povUpdateMessage(String message) {
+        if (povInstance) {
+            ManagedString ms(message);
+            std::string msg = std::string(ms.toCharArray());
+            povInstance->updateMessage(msg);
         }
     }
 }

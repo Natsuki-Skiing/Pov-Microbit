@@ -10,8 +10,8 @@
         "POV.ts",
         "extension.cpp",
         "shims.d.ts",
-        "sources/pov.cpp",
-        "sources/pov.h",
+        "pov.cpp",
+        "pov.h",
         "README.md"
     ],
     "testFiles": [
