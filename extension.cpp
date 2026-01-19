@@ -7,7 +7,7 @@ using namespace codal;
 
 namespace extension { 
     static Pov* povInstance = nullptr;
-    
+    //%
     //%
     void povShowMessage(String message) {
         if (povInstance) {
@@ -24,7 +24,8 @@ namespace extension {
         
         
         if (povInstance) {
-            povInstance->displayPov();
+            create_fiber([povInstance] {povInstance->displayPov();});
+            
         }
         
     }

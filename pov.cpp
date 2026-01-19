@@ -5,6 +5,7 @@
 #include "CodalFiber.h"
 #include "nrf_delay.h" 
 #include "pov.h"
+#include "pxt.h"
 
 #define SHAKE_THRESHOLD  12000   
 #define LETTER_DELAY_US  2000    
@@ -145,8 +146,8 @@ void Pov::prepareWholeMessage() {
 }
 
 void Pov::displayPov() {
-    uint8_t messageLen;
-    uint16_t msgNumberOfCols;
+    uint8_t messageLen = 0;
+    uint16_t msgNumberOfCols = 0;
     uint8_t windowStart = 0;
 
     // number of shakes, used to time window movement
