@@ -5,13 +5,14 @@
 using namespace pxt;
 using namespace codal;
 
-namespace extension { 
+namespace pov { 
     static Pov* povInstance = nullptr;
     //%
     //%
     void povShowMessage(String message) {
         if (povInstance) {
             delete povInstance;
+            povInstance = nullptr;
         }
         
         
@@ -20,7 +21,7 @@ namespace extension {
         ManagedString ms = MSTR(message); 
 
     
-        Pov p(std::string(ms.toCharArray()));
+        povInstance = new Pov(std::string(ms.toCharArray()));
         
         
         if (povInstance) {
