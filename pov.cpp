@@ -31,12 +31,14 @@
 #define ROW_3 15
 #define ROW_4 24
 #define ROW_5 19
-#define COL_3 3
+#define COL_3 31
+
 
 
 
 // Pov implementation
 Pov::Pov(std::string message) :  messagePending(false) {
+    uBit.display.clear();
     uBit.display.disable();
     updateMessage(message);
 
@@ -139,7 +141,8 @@ void Pov::displayPov() {
         int16_t x = uBit.accelerometer.getX();
 
         // Left to right x >= SHAKE_THRESHOLD
-        if (x <= -SHAKE_THRESHOLD) {
+        //x <= -SHAKE_THRESHOLD
+        if (true) {//DEBUG
             noShakes++;
             
             for (int index = 0; index < WINDOW_SIZE; index++) {
