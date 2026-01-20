@@ -6,18 +6,7 @@
 
 
 
-class PovAccelerometer {
-private:
-    codal::NRF52Pin i2cSdaInt;
-    codal::NRF52Pin i2cSclInt;
-    codal::NRF52I2C i2cInt;
 
-    int16_t readAxis(uint8_t reg);
-
-public:
-    PovAccelerometer();
-    int16_t getX();
-};
 
 class Pov {
 private:

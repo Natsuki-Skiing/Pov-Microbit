@@ -33,37 +33,11 @@
 #define ROW_5 19
 #define COL_3 3
 
-// Setup Serial for debugging 
-NRF52Pin usbTx(ID_PIN_USBTX, MICROBIT_PIN_UART_TX, PIN_CAPABILITY_DIGITAL);
-NRF52Pin usbRx(ID_PIN_USBRX, MICROBIT_PIN_UART_RX, PIN_CAPABILITY_DIGITAL);
-NRF52Serial serial(usbTx, usbRx, NRF_UARTE0);
 
-// PovAccelerometer implementation
-PovAccelerometer::PovAccelerometer() : 
-    i2cSdaInt(ID_PIN_SDA, MICROBIT_PIN_INT_SDA, PIN_CAPABILITY_DIGITAL),
-    i2cSclInt(ID_PIN_SCL, MICROBIT_PIN_INT_SCL, PIN_CAPABILITY_DIGITAL),
-    i2cInt(i2cSdaInt, i2cSclInt, NRF_TWIM0)
-{
-    i2cInt.setFrequency(100000);
-    
-    uint8_t config[] = {CTRL_REG1_A, 0x57};
-    i2cInt.write(ACCEL_ADDR, config, 2);
-}
-
-int16_t PovAccelerometer::readAxis(uint8_t reg) {
-    uint8_t data[2];
-    uint8_t cmd = reg | CMD_AUTO_INC;
-    i2cInt.write(ACCEL_ADDR, &cmd, 1, true);
-    i2cInt.read(ACCEL_ADDR, data, 2);
-    return (int16_t)((data[1] << 8) | data[0]);
-}
-
-int16_t PovAccelerometer::getX() {
-    return readAxis(OUT_X_L_A);
-}
 
 // Pov implementation
 Pov::Pov(std::string message) : povAccelerometer(), messagePending(false) {
+    uBit.display.disable();
     updateMessage(message);
 
     rowMasks[0] = (1u << ROW_1);
@@ -162,7 +136,7 @@ void Pov::displayPov() {
             noShakes = 0;
         }
         
-        int16_t x = povAccelerometer.getX();
+        int16_t x = uBit.accelerometer.getX();
 
         // Left to right x >= SHAKE_THRESHOLD
         if (x <= -SHAKE_THRESHOLD) {
