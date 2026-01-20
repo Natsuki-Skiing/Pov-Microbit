@@ -7,7 +7,7 @@
 #include "pov.h"
 #include "pxt.h"
 
-#define SHAKE_THRESHOLD  12000   
+#define SHAKE_THRESHOLD  2000   
 #define LETTER_DELAY_US  2000    
 #define SPACE_DELAY_US   8000    
 #define DARK_DELAY_US    200     
@@ -26,12 +26,12 @@
 #define WINDOW_SIZE 20
 #define NUMBER_OF_SPACERS 3
 
-#define ROW_1 21
-#define ROW_2 22
-#define ROW_3 15
-#define ROW_4 24
-#define ROW_5 19
-#define COL_3 31
+// #define ROW_1 21
+// #define ROW_2 22
+// #define ROW_3 15
+// #define ROW_4 24
+// #define ROW_5 19
+// #define COL_3 31
 
 
 
@@ -142,7 +142,7 @@ void Pov::displayPov() {
 
         // Left to right x >= SHAKE_THRESHOLD
         //x <= -SHAKE_THRESHOLD
-        if (true) {//DEBUG
+        if (x <= -SHAKE_THRESHOLD) {//DEBUG
             noShakes++;
             
             for (int index = 0; index < WINDOW_SIZE; index++) {
