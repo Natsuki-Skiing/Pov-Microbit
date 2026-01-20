@@ -15,11 +15,7 @@
 #define PORT0_OUT       (*(volatile uint32_t *)0x50000504)
 #define PORT0_DIR       (*(volatile uint32_t *)0x50000514)
 
-// Accelerometer 
-#define ACCEL_ADDR      (0x19 << 1) 
-#define CTRL_REG1_A     0x20
-#define OUT_X_L_A       0x28
-#define CMD_AUTO_INC    0x80
+
 
 #define SHAKES_MOVE_WIN 1
 #define NO_LETTER -1
@@ -142,7 +138,7 @@ void Pov::displayPov() {
 
         // Left to right x >= SHAKE_THRESHOLD
         //x <= -SHAKE_THRESHOLD
-        if (x <= -SHAKE_THRESHOLD) {//DEBUG
+        if (x <= -SHAKE_THRESHOLD) {
             noShakes++;
             
             for (int index = 0; index < WINDOW_SIZE; index++) {

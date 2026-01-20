@@ -21,8 +21,8 @@ namespace pov {
         ManagedString ms = MSTR(message); 
 
     
-        //povInstance = new Pov(std::string(ms.toCharArray()));
-        povInstance = new Pov("hi");
+        povInstance = new Pov(std::string(ms.toCharArray()));
+        //povInstance = new Pov("hi"); //DEBUG
         
         
         if (povInstance) {
