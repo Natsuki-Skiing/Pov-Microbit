@@ -37,6 +37,8 @@ namespace pov {
             ManagedString ms = MSTR(message);
             std::string msg = std::string(ms.toCharArray());
             povInstance->updateMessage(msg);
+        }else{
+            povShowMessage(message);
         }
     }
 }
