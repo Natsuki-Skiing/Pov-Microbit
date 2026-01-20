@@ -12,7 +12,7 @@ class Pov {
 private:
     std::vector<int8_t> messageIndexs;
     uint32_t rowMasks[5]; 
-    PovAccelerometer povAccelerometer;
+  
 
     
     const bool alpha[26][5][5] = {

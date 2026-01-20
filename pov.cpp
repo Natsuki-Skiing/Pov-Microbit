@@ -36,7 +36,7 @@
 
 
 // Pov implementation
-Pov::Pov(std::string message) : povAccelerometer(), messagePending(false) {
+Pov::Pov(std::string message) :  messagePending(false) {
     uBit.display.disable();
     updateMessage(message);
 
