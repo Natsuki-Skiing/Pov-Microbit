@@ -7,8 +7,8 @@
 #include "pov.h"
 #include "pxt.h"
 
-#define SHAKE_THRESHOLD  2000   
-#define LETTER_DELAY_US  2000    
+#define SHAKE_THRESHOLD  1750   
+#define LETTER_DELAY_US  2500    
 #define SPACE_DELAY_US   8000    
 #define DARK_DELAY_US    200     
 
@@ -20,7 +20,7 @@
 #define SHAKES_MOVE_WIN 1
 #define NO_LETTER -1
 #define WINDOW_SIZE 20
-#define NUMBER_OF_SPACERS 3
+#define NUMBER_OF_SPACERS 2
 
 // #define ROW_1 21
 // #define ROW_2 22
@@ -151,13 +151,13 @@ void Pov::displayPov() {
             }
             
             clearLEDS();
-            nrf_delay_ms(50); 
+            uBit.sleep(50);
         } 
         // right to left x <= -SHAKE_THRESHOLD
         else if (x >= SHAKE_THRESHOLD) {
             noShakes++;
             
-            for (int index = WINDOW_SIZE; index >= 0; index--) {
+            for (int index = WINDOW_SIZE-1; index >= 0; index--) {
                 // columns reverse order
                 setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
                 nrf_delay_us(LETTER_DELAY_US);
@@ -168,18 +168,16 @@ void Pov::displayPov() {
             }
             
             clearLEDS();
-            nrf_delay_ms(50);
+            uBit.sleep(50);
         }
         
         // Scroll text
         if(noShakes == SHAKES_MOVE_WIN && messageLen > 3){
-            windowStart++;
-            if((windowStart) > msgNumberOfCols){
-                windowStart = 0;
-            }
+            windowStart = (windowStart+1) %msgNumberOfCols;
+            
             noShakes = 0;
         }
         
-        nrf_delay_us(100); 
+        uBit.sleep(100);
     }
 }

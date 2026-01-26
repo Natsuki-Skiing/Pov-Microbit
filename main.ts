@@ -3,5 +3,5 @@ input.onButtonPressed(Button.A, function () {
 })
 input.onButtonPressed(Button.B, function () {
     pov.updateMessage("WORLD")
-})
-basic.showIcon(IconNames.Asleep)
+}) 
+basic.showIcon(IconNames.Fabulous)
