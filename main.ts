@@ -1,5 +1,5 @@
 input.onButtonPressed(Button.A, function () {
-    pov.showNumber(Number2)
+    pov.showNumber(0)
 })
 input.onButtonPressed(Button.B, function () {
     if (pov.POVIsRunning()) {
@@ -9,10 +9,4 @@ input.onButtonPressed(Button.B, function () {
         music.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.InBackground)
     }
 })
-input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    Number2 += 1
-})
-let Number2 = 0
-music.setVolume(23)
-Number2 = 0
-basic.showIcon(IconNames.Meh)
+basic.showIcon(IconNames.SmallHeart)

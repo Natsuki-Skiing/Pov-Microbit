@@ -27,13 +27,9 @@ namespace pov {
             // delete povInstance;
             // povInstance = nullptr;
         }
-        
-        
-        
-        
+
         ManagedString ms = MSTR(message); 
 
-    
         povInstance = new Pov(std::string(ms.toCharArray()));
         //povInstance = new Pov("hi"); //DEBUG
         

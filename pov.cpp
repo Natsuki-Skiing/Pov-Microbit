@@ -58,25 +58,20 @@ void Pov::stop(){
 }
 
 void Pov::getAlphaIndexes(const char* message, uint8_t length) {
-    const char validCharacters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#" ;
+    static const std::string validCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#";
 
     for (uint8_t i = 0; i <length; i++) {
         char currentChar = message[i];
 
         
-        if (currentChar >= 'a' && currentChar <= 'z') {
-            currentChar = toupper(currentChar);
-        }
+        
+        currentChar = toupper(currentChar);
+        
 
-        
-        for(uint8_t index =0;index < NUMBER_OF_CHARACTERS;index ++){
-            if(validCharacters[index] == currentChar){
-                this->messageIndexs.push_back(validCharacters[index]);
-                break;
-            }
+        size_t foundIndex = validCharacters.find(currentChar);
+        if (foundIndex != std::string::npos) {
+            this->messageIndexs.push_back(static_cast<int>(foundIndex));
         }
-        
-        
     }
 }
 
