@@ -11,4 +11,7 @@ declare namespace pov {
      */
     //% shim=pov::povUpdateMessage
     function povUpdateMessage(message: string): void;
+
+    //% shim=pov::povStopMessage
+    function povStopMessage():void;
 }

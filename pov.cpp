@@ -49,6 +49,11 @@ Pov::Pov(std::string message) :  messagePending(false) {
     clearLEDS();
 }
 
+void Pov::stop(){
+    uBit.display.enable();
+    uBit.display.clear();
+}
+
 void Pov::getAlphaIndexes(const char* message, int length) {
     for (int index = 0; index < length; index++) {
         char c = message[index];
