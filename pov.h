@@ -336,7 +336,7 @@ private:
     std::string pendingMessage;
     std::vector<std::vector<bool>> wholeMessage;
     void prepareWholeMessage();
-    void getAlphaIndexes(const char* message, int length);
+    void getAlphaIndexes(const char* message, uint8_t lenght);
     void clearLEDS();
     void setLEDS(std::vector<bool> colData);
 

@@ -22,6 +22,9 @@
 #define WINDOW_SIZE 20
 #define NUMBER_OF_SPACERS 2
 
+
+#define NUMBER_OF_CHARACTERS 36
+
 // #define ROW_1 21
 // #define ROW_2 22
 // #define ROW_3 15
@@ -54,10 +57,10 @@ void Pov::stop(){
     uBit.display.clear();
 }
 
-void Pov::getAlphaIndexes(const char* message, int length) {
-    static const std::string validCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#";
+void Pov::getAlphaIndexes(const char* message, uint8_t length) {
+    const char validCharacters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#" ;
 
-    for (int i = 0; i <length; i++) {
+    for (uint8_t i = 0; i <length; i++) {
         char currentChar = message[i];
 
         
@@ -65,13 +68,15 @@ void Pov::getAlphaIndexes(const char* message, int length) {
             currentChar = toupper(currentChar);
         }
 
-        // find the position of pos in string same as table
-        size_t foundIndex = validCharacters.find(currentChar);
-
         
-        if (foundIndex != std::string::npos) {
-            this->messageIndexs.push_back(static_cast<int>(foundIndex));
+        for(uint8_t index =0;index < NUMBER_OF_CHARACTERS;index ++){
+            if(validCharacters[index] == currentChar){
+                this->messageIndexs.push_back(validCharacters[index]);
+                break;
+            }
         }
+        
+        
     }
 }
 
@@ -135,7 +140,7 @@ void Pov::prepareWholeMessage() {
 
 void Pov::displayPov() {
     uint8_t messageLen = 0;
-    uint16_t msgNumberOfCols = 0;
+    uint8_t msgNumberOfCols = 0;
     uint8_t windowStart = 0;
 
     // number of shakes, used to time window movement
