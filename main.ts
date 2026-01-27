@@ -1,11 +1,18 @@
 input.onButtonPressed(Button.A, function () {
-    pov.showMessage("HELLO")
+    pov.showNumber(Number2)
 })
 input.onButtonPressed(Button.B, function () {
-    pov.stopMessage()
-    basic.showIcon(IconNames.Heart)
+    if (pov.POVIsRunning()) {
+        pov.stopMessage()
+        basic.showIcon(IconNames.Heart)
+    } else {
+        music.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.InBackground)
+    }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    pov.showMessage("Will")
+    Number2 += 1
 })
-basic.showIcon(IconNames.Fabulous)
+let Number2 = 0
+music.setVolume(23)
+Number2 = 0
+basic.showIcon(IconNames.Meh)

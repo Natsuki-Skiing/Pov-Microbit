@@ -14,4 +14,7 @@ declare namespace pov {
 
     //% shim=pov::povStopMessage
     function povStopMessage():void;
+
+    //% shim=pov::povIsRunning
+    function povIsRunning(): boolean;
 }

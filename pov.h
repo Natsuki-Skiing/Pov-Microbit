@@ -15,7 +15,7 @@ private:
   
 
     
-    const bool alpha[26][5][5] = {
+    const bool alpha[39][5][5] = {
             // 'A'
             {
                 {false, true, true, true, true},  // Column 0
@@ -240,14 +240,6 @@ private:
                 {false, false, false, false, false}, // Column 2
                 {false, false, false, false, false}, // Column 3
                 {false, false, false, false, false}   // Column 4
-            }
-            //2
-            {
-                {true, false, false, false, false},  // Column 0
-                {true, false, false, true, false}, // Column 1
-                {true, true, true, true, true}, // Column 2
-                {true, false, false, false, false}, // Column 3
-                {true, false, false, false, false}   // Column 4
             },
             // 2
             {
@@ -338,7 +330,7 @@ private:
                 {false, true, false, true, false}    // Column 4: Horizontal bars
             }
             };
-            };
+            
 
     volatile bool messagePending;
     std::string pendingMessage;

@@ -55,11 +55,22 @@ void Pov::stop(){
 }
 
 void Pov::getAlphaIndexes(const char* message, int length) {
-    for (int index = 0; index < length; index++) {
-        char c = message[index];
-        if (c >= 'a' && c <= 'z') c = toupper(c);
-        if (c >= 'A' && c <= 'Z') {
-            this->messageIndexs.push_back(c - 'A');
+    static const std::string validCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#";
+
+    for (int i = 0; i <length; i++) {
+        char currentChar = message[i];
+
+        
+        if (currentChar >= 'a' && currentChar <= 'z') {
+            currentChar = toupper(currentChar);
+        }
+
+        // find the position of pos in string same as table
+        size_t foundIndex = validCharacters.find(currentChar);
+
+        
+        if (foundIndex != std::string::npos) {
+            this->messageIndexs.push_back(static_cast<int>(foundIndex));
         }
     }
 }

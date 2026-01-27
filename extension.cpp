@@ -45,6 +45,14 @@ namespace pov {
         
     }
     
+    //%
+
+    bool povIsRunning(){
+        if(povInstance){
+            return(true);
+        }
+        return(false);
+    }
 
     // //%
     // void povUpdateMessage(String message) {
