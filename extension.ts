@@ -67,14 +67,14 @@ namespace shakeScreen {
     //% block="Is shake on"
     //% weight=0
     //% group="Attributes"
-    export function POVIsRunning(): boolean {
+    export function getRunning(): boolean {
         return(povIsRunning());
     }
     
     //% block="Is setLooping on"
     //% weight=0
     //% group="Attributes"
-    export function POVIsLooping(): boolean {
+    export function getLooping(): boolean {
         return (povIsLooping());
     }
 

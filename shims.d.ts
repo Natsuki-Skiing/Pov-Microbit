@@ -5,7 +5,7 @@ declare namespace shakeScreen {
      */
     //% shim=Pov::povShowMessage
     function povShowMessage(message: string): void;
-    
+
     /**
      * Update the POV message
      */
@@ -13,13 +13,13 @@ declare namespace shakeScreen {
     function povUpdateMessage(message: string): void;
 
     //% shim=shakeScreen::povStopMessage
-    function povStopMessage():void;
+    function povStopMessage(): void;
 
     //% shim=shakeScreen::povIsRunning
     function povIsRunning(): boolean;
 
     //% shim=shakeScreen::povSetNumberOfCharacters
-    function povSetNumberOfCharacters(number:number):void;
+    function povSetNumberOfCharacters(number: number): void;
 
     //% shim=shakeScreen::povGetNumberOfCharacters
     function povGetNumberOfCharacters(): number;
@@ -27,5 +27,5 @@ declare namespace shakeScreen {
     //% shim=shakeScreen::povIsLooping
     function povIsLooping(): boolean;
     //% shim=shakeScreen::povSetLooping
-    function povSetLooping(value:boolean):void;
+    function povSetLooping(value: boolean): void;
 }

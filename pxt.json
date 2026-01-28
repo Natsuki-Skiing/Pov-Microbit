@@ -9,11 +9,11 @@
         "main.ts",
         "POV.ts",
         "extension.cpp",
-        "shims.d.ts",
         "pov.cpp",
         "pov.h",
         "extension.ts",
-        "README.md"
+        "README.md",
+        "shims.d.ts"
     ],
     "testFiles": [
         "test.ts",
@@ -27,7 +27,7 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj",
+    "preferredEditor": "tsprj",
     "bundleddirs": [
         "libs/core"
     ],

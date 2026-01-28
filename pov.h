@@ -7,7 +7,7 @@
 
 
 
-
+namespace shakeScreen {
 class Pov {
 private:
     std::vector<int8_t> messageIndexs;
@@ -350,4 +350,4 @@ public:
     void setLooping(bool looping);
     bool getLooping();
 
-};
+};}

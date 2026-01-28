@@ -5,7 +5,7 @@
 using namespace pxt;
 using namespace codal;
 
-namespace pov { 
+namespace shakeScreen{ 
     static Pov* povInstance = nullptr;
     
     //%
@@ -19,23 +19,16 @@ namespace pov {
     }
     //%
     void povShowMessage(String message) {
+        ManagedString ms = MSTR(message); 
+        std::string msg = std::string(ms.toCharArray());
         if (povInstance) {
-            ManagedString ms = MSTR(message);
-            std::string msg = std::string(ms.toCharArray());
             povInstance->updateMessage(msg);
             
             // delete povInstance;
-            // povInstance = nullptr;
-        }
-
-        ManagedString ms = MSTR(message); 
-
-        povInstance = new Pov(std::string(ms.toCharArray()));
-        //povInstance = new Pov("hi"); //DEBUG
-        
-        
-        if (povInstance) {
-            create_fiber([povInstance] {povInstance->displayPov();});    
+             // povInstance = nullptr;
+        }else{
+            povInstance = new Pov(msg);
+            create_fiber([povInstance] {povInstance->displayPov();});
         }
         
     }

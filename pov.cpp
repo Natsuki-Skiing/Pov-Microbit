@@ -25,7 +25,7 @@
 
 
 
-
+namespace shakeScreen {
 // Pov implementation
 Pov::Pov(std::string message) :  messagePending(false) {
     uBit.display.clear();
@@ -224,4 +224,5 @@ void Pov::displayPov() {
         
         uBit.sleep(100);
     }
+}
 }
