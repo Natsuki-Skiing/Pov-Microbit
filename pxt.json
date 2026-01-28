@@ -27,7 +27,7 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "tsprj",
+    "preferredEditor": "blocksprj",
     "bundleddirs": [
         "libs/core"
     ],

@@ -19,7 +19,6 @@
 
 #define SHAKES_MOVE_WIN 1
 #define NO_LETTER -1
-#define WINDOW_SIZE 20
 #define NUMBER_OF_SPACERS 2
 
 
@@ -31,6 +30,8 @@
 Pov::Pov(std::string message) :  messagePending(false) {
     uBit.display.clear();
     uBit.display.disable();
+    this-> windowSize = 20;
+    this -> looping = false;
     updateMessage(message);
 
     rowMasks[0] = (1u << ROW_1);
@@ -49,6 +50,25 @@ void Pov::stop(){
     uBit.display.clear();
 }
 
+bool Pov::getLooping(){
+    return(this->looping);
+}
+
+void Pov::setLooping(bool value){
+    this->looping = value;
+}
+
+uint8_t Pov::getNumberOfLetters(){
+    return(this->windowSize / 7);
+
+}
+
+void Pov::setNumberOfLetters(uint8_t numberOfLetters){
+    if(numberOfLetters >0){
+        this->windowSize = numberOfLetters*7;
+    }
+    
+}
 void Pov::getAlphaIndexes(const char* message, uint8_t length) {
     static const std::string validCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#";
 
@@ -149,8 +169,14 @@ void Pov::displayPov() {
         if (x <= -SHAKE_THRESHOLD) {
             noShakes++;
             
-            for (int index = 0; index < WINDOW_SIZE; index++) {
-                setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
+            for (int index = 0; index < windowSize; index++) {
+                if(this->looping){
+                    setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
+                }else{
+                    if (windowStart >= 0 && windowStart < msgNumberOfCols) {
+                        setLEDS(wholeMessage.at(windowStart));
+                    }
+                }
                 nrf_delay_us(LETTER_DELAY_US);
                 
                 // Ghosting reduction
@@ -165,9 +191,16 @@ void Pov::displayPov() {
         else if (x >= SHAKE_THRESHOLD) {
             noShakes++;
             
-            for (int index = WINDOW_SIZE-1; index >= 0; index--) {
+            for (int index = windowSize-1; index >= 0; index--) {
                 // columns reverse order
-                setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
+                if(this->looping){
+                    setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
+                }else{
+                    if (windowStart >= 0 && windowStart < msgNumberOfCols) {
+                        setLEDS(wholeMessage.at(windowStart));
+                    }
+                }
+                
                 nrf_delay_us(LETTER_DELAY_US);
                 
                 // Ghosting reduction
@@ -181,7 +214,10 @@ void Pov::displayPov() {
         
         // Scroll text
         if(noShakes == SHAKES_MOVE_WIN && messageLen > 3){
-            windowStart = (windowStart+1) %msgNumberOfCols;
+            if(this->looping){
+                windowStart = (windowStart+1) %msgNumberOfCols;
+            }
+            
             
             noShakes = 0;
         }

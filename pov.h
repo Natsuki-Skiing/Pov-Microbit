@@ -12,8 +12,8 @@ class Pov {
 private:
     std::vector<int8_t> messageIndexs;
     uint32_t rowMasks[5]; 
-  
-
+    uint8_t windowSize;
+    bool looping;
     
     const bool alpha[39][5][5] = {
             // 'A'
@@ -347,5 +347,7 @@ public:
     void stop();
     uint8_t getNumberOfLetters();
     void setNumberOfLetters(uint8_t noLetters);
+    void setLooping(bool looping);
+    bool getLooping();
 
 };

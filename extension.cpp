@@ -7,7 +7,7 @@ using namespace codal;
 
 namespace pov { 
     static Pov* povInstance = nullptr;
-    //%
+    
     //%
     void povStopMessage(){
         if(povInstance){
@@ -35,14 +35,28 @@ namespace pov {
         
         
         if (povInstance) {
-            create_fiber([povInstance] {povInstance->displayPov();});
-            
+            create_fiber([povInstance] {povInstance->displayPov();});    
         }
         
     }
+
+    //%
+    void povSetLooping(bool value){
+        if(povInstance){
+            povInstance ->setLooping(value);
+        }
+    }
+
+    //% 
+    bool povIsLooping(){
+        if(povInstance){
+            return(povInstance->getLooping());
+        }
+
+        return(false);
+    }
     
     //%
-
     bool povIsRunning(){
         if(povInstance){
             return(true);
@@ -50,12 +64,20 @@ namespace pov {
         return(false);
     }
 
-    // //%
-    // void povUpdateMessage(String message) {
-    //     if (povInstance) {
-            
-    //     }else{
-            
+    // //% 
+    // bool povIsLooping(){
+    //     if(povInstance){
+    //         return(povInstance->getLooping());
     //     }
+
+    //     return(false);
     // }
+    
+    //%
+
+    void povSetLoop(bool value){
+        if(povInstance){
+            povInstance->setLooping(value);
+        }
+    }
 }

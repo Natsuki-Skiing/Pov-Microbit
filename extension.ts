@@ -35,12 +35,33 @@ namespace shakeScreen {
         povStopMessage();
     }
 
-    //% block="Number of letters"
+    //% block="Looping On"
+    //% weight=40
+    //% group="Screen Control"
+    export function loopOn(): void {
+        povSetLooping(true);
+    }
+
+    //% block="Looping Off"
+    //% weight=40
+    //% group="Screen Control"
+    export function loopOff(): void {
+        povSetLooping(false);
+    }
+
+    //% block="Set number of Characters $numberLetter"
+    //% weight=20
+    //% group="Attributes"
+    //% numberLetter.defl=3
+    export function setNumberOfCharacters(numberLetter:number):void{
+        povSetNumberOfCharacters(numberLetter);
+    }
+    //% block="Number of Characters"
     //% weight= 10
     //% group="Attributes"
     export function getNumberOfCharacters():number{
         //Place Holder
-        return(1);
+        return(povGetNumberOfCharacters());
     }
 
     //% block="Is shake on"
@@ -49,7 +70,13 @@ namespace shakeScreen {
     export function POVIsRunning(): boolean {
         return(povIsRunning());
     }
-
+    
+    //% block="Is setLooping on"
+    //% weight=0
+    //% group="Attributes"
+    export function POVIsLooping(): boolean {
+        return (povIsLooping());
+    }
 
 
     
