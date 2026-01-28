@@ -345,5 +345,7 @@ public:
     void updateMessage(std::string s);
     void displayPov();
     void stop();
+    uint8_t getNumberOfLetters();
+    void setNumberOfLetters(uint8_t noLetters);
 
 };

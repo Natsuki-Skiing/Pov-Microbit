@@ -3,16 +3,16 @@
  */
 //% weight=100 color=#0fbc11 icon="\uf06e"
 //% groups=['Display']
-namespace pov {
+namespace shakeScreen {
     
     /**
      * Show a message using POV display
      * @param message the message to display
      */
-    //% block="Show POV message $message"
+    //% block="Show  message $message"
     //% message.defl="HELLO"
     //% weight=100
-    //% group="Display"
+    //% group="Screen Control"
     export function showMessage(message: string): void {
         povShowMessage(message);
     }
@@ -21,23 +21,31 @@ namespace pov {
      * Show a number using POV display
      * @param number the number to display
      */
-    //% block="Show POV number $number"
+    //% block="Show number $number"
     //% number.defl=67
     //% weight=90
-    //% group="Display"
+    //% group="Screen Control"
     export function showNumber(number:number): void {
         povShowMessage(number.toString());
     }
-    //% block="Stop POV"
+    //% block="Stop"
     //% weight=50
-    //% group="Display"
+    //% group="Screen Control"
     export function stopMessage(): void {
         povStopMessage();
     }
 
-    //% block="POV is on"
+    //% block="Number of letters"
+    //% weight= 10
+    //% group="Attributes"
+    export function getNumberOfCharacters():number{
+        //Place Holder
+        return(1);
+    }
+
+    //% block="Is shake on"
     //% weight=0
-    //% group="Display"
+    //% group="Attributes"
     export function POVIsRunning(): boolean {
         return(povIsRunning());
     }

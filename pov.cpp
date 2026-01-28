@@ -7,7 +7,7 @@
 #include "pov.h"
 #include "pxt.h"
 
-#define SHAKE_THRESHOLD  1750   
+#define SHAKE_THRESHOLD  1800   
 #define LETTER_DELAY_US  2500    
 #define SPACE_DELAY_US   8000    
 #define DARK_DELAY_US    200     
@@ -23,14 +23,6 @@
 #define NUMBER_OF_SPACERS 2
 
 
-#define NUMBER_OF_CHARACTERS 36
-
-// #define ROW_1 21
-// #define ROW_2 22
-// #define ROW_3 15
-// #define ROW_4 24
-// #define ROW_5 19
-// #define COL_3 31
 
 
 
