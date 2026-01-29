@@ -14,6 +14,7 @@ private:
     uint32_t rowMasks[5]; 
     uint8_t windowSize;
     bool looping;
+    bool messageComplete;
     
     const bool alpha[39][5][5] = {
             // 'A'

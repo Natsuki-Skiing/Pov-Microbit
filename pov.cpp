@@ -31,7 +31,7 @@ Pov::Pov(std::string message) :  messagePending(false) {
     uBit.display.clear();
     uBit.display.disable();
     this-> windowSize = 20;
-    this -> looping = false;
+    this-> looping = false;
     updateMessage(message);
 
     rowMasks[0] = (1u << ROW_1);
@@ -56,6 +56,9 @@ bool Pov::getLooping(){
 
 void Pov::setLooping(bool value){
     this->looping = value;
+    if(value){
+        this->messageComplete = false;
+    }
 }
 
 uint8_t Pov::getNumberOfLetters(){
@@ -152,7 +155,8 @@ void Pov::displayPov() {
 
     // number of shakes, used to time window movement
     int8_t noShakes = 0;
-
+    //Used for new non looping mode
+    bool messageComplete = false;
     while (true) {
         if(this->messagePending) {
             prepareWholeMessage();
@@ -168,61 +172,70 @@ void Pov::displayPov() {
         //x <= -SHAKE_THRESHOLD
         if (x <= -SHAKE_THRESHOLD) {
             noShakes++;
-            
-            for (int index = 0; index < windowSize; index++) {
-                if(this->looping){
-                    setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
-                }else{
-                    if (windowStart >= 0 && windowStart < msgNumberOfCols) {
-                        setLEDS(wholeMessage.at(windowStart));
+            if(!messageComplete){
+                for (int index = 0; index < windowSize; index++) {
+                    if(this->looping){
+                        setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
+                    }else{
+                        if ((windowStart + index) >= 0 && (windowStart + index) < msgNumberOfCols) {
+                            setLEDS(wholeMessage.at(windowStart + index));
+                        }
                     }
+                    nrf_delay_us(LETTER_DELAY_US);
+                    
+                    // Ghosting reduction
+                    clearLEDS(); 
+                    nrf_delay_us(DARK_DELAY_US);
                 }
-                nrf_delay_us(LETTER_DELAY_US);
-                
-                // Ghosting reduction
-                clearLEDS(); 
-                nrf_delay_us(DARK_DELAY_US);
-            }
             
             clearLEDS();
             uBit.sleep(50);
+            }
         } 
         // right to left x <= -SHAKE_THRESHOLD
         else if (x >= SHAKE_THRESHOLD) {
             noShakes++;
-            
-            for (int index = windowSize-1; index >= 0; index--) {
-                // columns reverse order
-                if(this->looping){
-                    setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
-                }else{
-                    if (windowStart >= 0 && windowStart < msgNumberOfCols) {
-                        setLEDS(wholeMessage.at(windowStart));
+            if(!messageComplete){
+                for (int index = windowSize-1; index >= 0; index--) {
+                    // columns reverse order
+                    if(this->looping){
+                        setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
+                    }else{
+                        if ((windowStart + index) >= 0 && (windowStart + index) < msgNumberOfCols) {
+                            setLEDS(wholeMessage.at(windowStart + index));
+                        }
                     }
+                    
+                    nrf_delay_us(LETTER_DELAY_US);
+                    
+                    // Ghosting reduction
+                    clearLEDS(); 
+                    nrf_delay_us(DARK_DELAY_US);
                 }
-                
-                nrf_delay_us(LETTER_DELAY_US);
-                
-                // Ghosting reduction
-                clearLEDS(); 
-                nrf_delay_us(DARK_DELAY_US);
-            }
             
             clearLEDS();
             uBit.sleep(50);
+            }
         }
         
         // Scroll text
         if(noShakes == SHAKES_MOVE_WIN && messageLen > 3){
             if(this->looping){
-                windowStart = (windowStart+1) %msgNumberOfCols;
+                windowStart = (windowStart+1) % msgNumberOfCols;
+            } else {
+                if ((windowStart + windowSize) < msgNumberOfCols) {
+                    windowStart = (windowStart + 1);
+                } else {
+                    // Message complete - reset after a delay
+                    messageComplete = true;
+                    
+                }
             }
-            
+            }
             
             noShakes = 0;
         }
         
         uBit.sleep(100);
     }
-}
 }

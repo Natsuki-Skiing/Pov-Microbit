@@ -7,7 +7,7 @@ using namespace codal;
 
 namespace shakeScreen{ 
     static Pov* povInstance = nullptr;
-    
+    static bool looping = false;
     //%
     void povStopMessage(){
         if(povInstance){
@@ -28,6 +28,7 @@ namespace shakeScreen{
              // povInstance = nullptr;
         }else{
             povInstance = new Pov(msg);
+            povInstance->setLooping(looping);
             create_fiber([povInstance] {povInstance->displayPov();});
         }
         
@@ -35,8 +36,9 @@ namespace shakeScreen{
 
     //%
     void povSetLooping(bool value){
+        looping = value;
         if(povInstance){
-            povInstance ->setLooping(value);
+            povInstance->setLooping(value);
         }
     }
 
@@ -57,20 +59,22 @@ namespace shakeScreen{
         return(false);
     }
 
-    // //% 
-    // bool povIsLooping(){
-    //     if(povInstance){
-    //         return(povInstance->getLooping());
-    //     }
-
-    //     return(false);
-    // }
     
-    //%
+    
+   
 
-    void povSetLoop(bool value){
+    //%
+    void povSetNumberOfCharacters(int number){
         if(povInstance){
-            povInstance->setLooping(value);
+            povInstance->setNumberOfLetters(number);
         }
+    }
+
+    //%
+    int povGetNumberOfCharacters(){
+        if(povInstance){
+            return povInstance->getNumberOfLetters();
+        }
+        return 0;
     }
 }

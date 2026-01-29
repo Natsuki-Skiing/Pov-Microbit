@@ -64,14 +64,14 @@ namespace shakeScreen {
         return(povGetNumberOfCharacters());
     }
 
-    //% block="Is shake on"
+    //% block="Screen Shake on"
     //% weight=0
     //% group="Attributes"
     export function getRunning(): boolean {
         return(povIsRunning());
     }
     
-    //% block="Is setLooping on"
+    //% block="Looping on"
     //% weight=0
     //% group="Attributes"
     export function getLooping(): boolean {
