@@ -160,13 +160,14 @@ void Pov::displayPov() {
     int8_t noShakes = 0;
     //Used for new non looping mode
     bool messageComplete = false;
-    while (true) {
+    while (!this->messageComplete) {
         if(this->messagePending) {
             prepareWholeMessage();
             messageLen = this->messageIndexs.size();
             msgNumberOfCols = wholeMessage.size();
             windowStart = 0;
             noShakes = 0;
+            completionCounter = 0;
         }
         
         int16_t x = uBit.accelerometer.getX();
@@ -189,6 +190,8 @@ void Pov::displayPov() {
             
             clearLEDS();
             uBit.sleep(50);
+
+             
             
         } 
         // right to left x <= -SHAKE_THRESHOLD
@@ -211,18 +214,26 @@ void Pov::displayPov() {
             clearLEDS();
             uBit.sleep(50);
             
+            
         }
         
         // Scroll text
         if(noShakes >= SHAKES_MOVE_WIN && messageLen>3){
-            uBit.serial.printf("%d",getNumberOfLetters());
             windowStart = (windowStart+1) % msgNumberOfCols;
-           
+            if(!this->looping){
+                completionCounter ++;
+                // Check if message completed full cycle non looping
+                if(windowStart == 0 && completionCounter > 0) {
+                    messageComplete = true;
+                }
+            }
             
             noShakes = 0;
         }
         
         //uBit.sleep(100);
     }
+    stop();
+    
 }
 }

@@ -35,23 +35,24 @@ namespace shakeScreen {
         povStopMessage();
     }
 
-    // //% block="Looping On"
-    // //% weight=40
-    // //% group="Screen Control"
-    // export function loopOn(): void {
-    //     povSetLooping(true);
-    // }
-
-    // //% block="Looping Off"
-    // //% weight=40
-    // //% group="Screen Control"
-    // export function loopOff(): void {
-    //     povSetLooping(false);
-    // }
+    //% block="looping enabled"
+    //% weight=40
+    //% group="Attributes"
+    export function isLooping(): boolean {
+        return povIsLooping();
+    }
+    //% block="set looping $enabled"
+    //% enabled.shadow="toggleOnOff"
+    //% enabled.defl=false
+    //% weight=50
+    //% group="Settings"
+    export function setLooping(enabled: boolean): void {
+        povSetLooping(enabled);
+    }
 
     //% block="Set number of Characters $numberLetter"
     //% weight=20
-    //% group="Attributes"
+    //% group="Settings"
     //% numberLetter.min=2 numberLetter.max=10
     //% numberLetter.defl=3
     export function setNumberOfCharacters(numberLetter:number):void{

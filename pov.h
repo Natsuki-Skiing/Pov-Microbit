@@ -15,7 +15,7 @@ private:
     uint8_t windowSize;
     bool looping;
     bool messageComplete;
-    
+    bool shouldStop;
     const bool alpha[39][5][5] = {
             // 'A'
             {

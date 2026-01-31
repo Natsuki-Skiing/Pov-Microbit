@@ -7,31 +7,31 @@ using namespace codal;
 
 namespace shakeScreen{ 
     static Pov* povInstance = nullptr;
-    static bool looping = false;
+    static bool looping = false;  // Default OFF
+    
     //%
     void povStopMessage(){
         if(povInstance){
             povInstance->stop();
             delete povInstance;
             povInstance = nullptr;
-
         }
     }
+    
     //%
     void povShowMessage(String message) {
         ManagedString ms = MSTR(message); 
         std::string msg = std::string(ms.toCharArray());
+        
         if (povInstance) {
+            // Update existing message
             povInstance->updateMessage(msg);
-            
-            // delete povInstance;
-             // povInstance = nullptr;
-        }else{
+        } else {
+            // Create new instance
             povInstance = new Pov(msg);
             povInstance->setLooping(looping);
             create_fiber([povInstance] {povInstance->displayPov();});
         }
-        
     }
 
     //%
@@ -47,8 +47,7 @@ namespace shakeScreen{
         if(povInstance){
             return(povInstance->getLooping());
         }
-
-        return(false);
+        return(looping);
     }
     
     //%
@@ -58,10 +57,6 @@ namespace shakeScreen{
         }
         return(false);
     }
-
-    
-    
-   
 
     //%
     void povSetNumberOfCharacters(int number){
@@ -75,6 +70,6 @@ namespace shakeScreen{
         if(povInstance){
             return povInstance->getNumberOfLetters();
         }
-        return 0;
+        return 3;  // Default value
     }
 }
