@@ -52,6 +52,7 @@ namespace shakeScreen {
     //% block="Set number of Characters $numberLetter"
     //% weight=20
     //% group="Attributes"
+    //% numberLetter.min=2 numberLetter.max=10
     //% numberLetter.defl=3
     export function setNumberOfCharacters(numberLetter:number):void{
         povSetNumberOfCharacters(numberLetter);
