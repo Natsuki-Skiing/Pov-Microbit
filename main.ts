@@ -1,2 +1,4 @@
-shakeScreen.loopOn()
-shakeScreen.showMessage("HELLO")
+input.onButtonPressed(Button.A, function () {
+	
+})
+shakeScreen.showMessage("Hello!")

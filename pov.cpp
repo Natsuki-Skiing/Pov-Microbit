@@ -8,18 +8,18 @@
 #include "pxt.h"
 
 #define SHAKE_THRESHOLD  1800   
-#define LETTER_DELAY_US  2500    
-#define SPACE_DELAY_US   8000    
-#define DARK_DELAY_US    200     
+#define LETTER_DELAY_US  2000    
+#define SPACE_DELAY_US   7000    
+#define DARK_DELAY_US    150     
 
 #define PORT0_OUT       (*(volatile uint32_t *)0x50000504)
 #define PORT0_DIR       (*(volatile uint32_t *)0x50000514)
 
 
 
-#define SHAKES_MOVE_WIN 1
+#define SHAKES_MOVE_WIN 2
 #define NO_LETTER -1
-#define NUMBER_OF_SPACERS 2
+#define NUMBER_OF_SPACERS 3
 
 
 
@@ -62,13 +62,13 @@ void Pov::setLooping(bool value){
 }
 
 uint8_t Pov::getNumberOfLetters(){
-    return(this->windowSize / 7);
+    return(this->windowSize / (5 + NUMBER_OF_SPACERS));
 
 }
 
 void Pov::setNumberOfLetters(uint8_t numberOfLetters){
     if(numberOfLetters >0){
-        this->windowSize = numberOfLetters*7;
+        this->windowSize = numberOfLetters*(5+NUMBER_OF_SPACERS);
     }
     
 }
@@ -146,6 +146,9 @@ void Pov::prepareWholeMessage() {
             wholeMessage.push_back({false, false, false, false, false});
         }
     }
+    for(int s = 0; s < 4; s++) {
+            wholeMessage.push_back({false, false, false, false, false});
+    }
 }
 
 void Pov::displayPov() {
@@ -172,70 +175,54 @@ void Pov::displayPov() {
         //x <= -SHAKE_THRESHOLD
         if (x <= -SHAKE_THRESHOLD) {
             noShakes++;
-            if(!messageComplete){
+            
                 for (int index = 0; index < windowSize; index++) {
-                    if(this->looping){
-                        setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
-                    }else{
-                        if ((windowStart + index) >= 0 && (windowStart + index) < msgNumberOfCols) {
-                            setLEDS(wholeMessage.at(windowStart + index));
-                        }
-                    }
+                    
+                    setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
+                    
                     nrf_delay_us(LETTER_DELAY_US);
                     
                     // Ghosting reduction
-                    clearLEDS(); 
+                    //clearLEDS(); 
                     nrf_delay_us(DARK_DELAY_US);
                 }
             
             clearLEDS();
             uBit.sleep(50);
-            }
+            
         } 
         // right to left x <= -SHAKE_THRESHOLD
         else if (x >= SHAKE_THRESHOLD) {
             noShakes++;
-            if(!messageComplete){
-                for (int index = windowSize-1; index >= 0; index--) {
-                    // columns reverse order
-                    if(this->looping){
-                        setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
-                    }else{
-                        if ((windowStart + index) >= 0 && (windowStart + index) < msgNumberOfCols) {
-                            setLEDS(wholeMessage.at(windowStart + index));
-                        }
-                    }
-                    
-                    nrf_delay_us(LETTER_DELAY_US);
-                    
-                    // Ghosting reduction
-                    clearLEDS(); 
-                    nrf_delay_us(DARK_DELAY_US);
-                }
+           
+            for (int index = windowSize-1; index >= 0; index--) {
+                // columns reverse order
+                
+                setLEDS(wholeMessage.at(((windowStart + index) % msgNumberOfCols)));
+                
+                
+                nrf_delay_us(LETTER_DELAY_US);
+                
+                // Ghosting reduction
+                clearLEDS(); 
+                nrf_delay_us(DARK_DELAY_US);
+            }
             
             clearLEDS();
             uBit.sleep(50);
-            }
+            
         }
         
         // Scroll text
-        if(noShakes == SHAKES_MOVE_WIN && messageLen > 3){
-            if(this->looping){
-                windowStart = (windowStart+1) % msgNumberOfCols;
-            } else {
-                if ((windowStart + windowSize) < msgNumberOfCols) {
-                    windowStart = (windowStart + 1);
-                } else {
-                    // Message complete - reset after a delay
-                    messageComplete = true;
-                    
-                }
-            }
-            }
+        if(noShakes >= SHAKES_MOVE_WIN && messageLen>3){
+            uBit.serial.printf("%d",getNumberOfLetters());
+            windowStart = (windowStart+1) % msgNumberOfCols;
+           
             
             noShakes = 0;
         }
         
-        uBit.sleep(100);
+        //uBit.sleep(100);
     }
+}
 }

@@ -10,7 +10,7 @@ namespace shakeScreen {
      * @param message the message to display
      */
     //% block="Show  message $message"
-    //% message.defl="HELLO"
+    //% message.defl="Hi"
     //% weight=100
     //% group="Screen Control"
     export function showMessage(message: string): void {
@@ -35,19 +35,19 @@ namespace shakeScreen {
         povStopMessage();
     }
 
-    //% block="Looping On"
-    //% weight=40
-    //% group="Screen Control"
-    export function loopOn(): void {
-        povSetLooping(true);
-    }
+    // //% block="Looping On"
+    // //% weight=40
+    // //% group="Screen Control"
+    // export function loopOn(): void {
+    //     povSetLooping(true);
+    // }
 
-    //% block="Looping Off"
-    //% weight=40
-    //% group="Screen Control"
-    export function loopOff(): void {
-        povSetLooping(false);
-    }
+    // //% block="Looping Off"
+    // //% weight=40
+    // //% group="Screen Control"
+    // export function loopOff(): void {
+    //     povSetLooping(false);
+    // }
 
     //% block="Set number of Characters $numberLetter"
     //% weight=20
@@ -71,12 +71,12 @@ namespace shakeScreen {
         return(povIsRunning());
     }
     
-    //% block="Looping on"
-    //% weight=0
-    //% group="Attributes"
-    export function getLooping(): boolean {
-        return (povIsLooping());
-    }
+    // //% block="Looping on"
+    // //% weight=0
+    // //% group="Attributes"
+    // export function getLooping(): boolean {
+    //     return (povIsLooping());
+    // }
 
 
     
