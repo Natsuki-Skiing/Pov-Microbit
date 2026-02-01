@@ -235,7 +235,7 @@ void Pov::displayPov() {
             noShakes = 0;
         }
         
-        //uBit.sleep(100);
+        uBit.sleep(50);// Letting some other fibers do stuff
     }
     stop();
     

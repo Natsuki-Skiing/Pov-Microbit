@@ -229,83 +229,83 @@ private:
             // Numbers
             // 0
             {
-                {false, true, true, true, false},  // Column 0
-                {true, false, false, false, true}, // Column 1
-                {true, false, true, false, true}, // Column 2
-                {true, false, false, false, true}, // Column 3
-                {false, true, true, true, false}   // Column 4
+                {false, true, true, true, false},  // Column 0: Left curve
+                {true, false, false, false, true}, // Column 1: Top/bottom curves
+                {true, false, false, false, true}, // Column 2: Sides
+                {true, false, false, false, true}, // Column 3: Top/bottom curves
+                {false, true, true, true, false}   // Column 4: Right curve
             },
-            //1
+            // 1
             {
-                {false, false, false, false, false},  // Column 0
-                {false, false, false, false, false}, // Column 1
-                {false, false, false, false, false}, // Column 2
-                {false, false, false, false, false}, // Column 3
-                {false, false, false, false, false}   // Column 4
+                {false, false, false, false, false}, // Column 0: Empty
+                {false, true, false, false, true},   // Column 1: Left edge
+                {true, true, true, true, true},      // Column 2: Center stem
+                {false, false, false, false, true},  // Column 3: Base extension
+                {false, false, false, false, false}  // Column 4: Empty
             },
             // 2
             {
-                {false, true, false, false, true},  // Column 0: Start of top curve + Base
-                {true, false, false, false, true},  // Column 1: Top curve + Base
-                {true, false, true, false, true},   // Column 2: Top curve + Mid + Base
-                {true, false, false, true, true},   // Column 3: Top curve + Diagonal + Base
-                {false, true, true, false, false}   // Column 4: Right curve
+                {false, true, false, false, true},   // Column 0: Top curve + base
+                {true, false, false, false, true},   // Column 1: Top-right + base
+                {true, false, false, true, true},    // Column 2: Middle diagonal
+                {true, false, true, false, true},    // Column 3: Upper-mid diagonal
+                {false, true, false, false, true}    // Column 4: Top + base line
             },
             // 3
             {
-                {false, true, false, false, true},  // Column 0: Top/Bot tips
-                {true, false, false, false, true},  // Column 1: Top/Bot curves
-                {true, false, true, false, true},   // Column 2: Mid prongs
-                {true, false, true, false, true},   // Column 3: Mid prongs
-                {false, true, true, true, false}    // Column 4: Right curve spine
+                {false, true, false, false, true},   // Column 0: Outer edges
+                {true, false, true, false, true},    // Column 1: Gaps + ends
+                {true, false, true, false, true},    // Column 2: Middle bar + ends
+                {true, false, true, false, true},    // Column 3: Gaps + ends
+                {false, true, false, true, false}    // Column 4: Right curves
             },
             // 4
             {
-                {false, false, true, true, false},  // Column 0: Diagonal top
-                {false, true, false, true, false},  // Column 1: Diagonal mid
-                {true, false, false, true, false},  // Column 2: Diagonal low
-                {true, true, true, true, true},     // Column 3: Vertical Stem
-                {false, false, false, true, false}  // Column 4: Horizontal bar overhang
+                {false, false, true, true, false},   // Column 0: Top diagonal
+                {false, true, false, true, false},   // Column 1: Diagonal continues
+                {true, false, false, true, false},   // Column 2: Diagonal + crossbar
+                {true, true, true, true, true},      // Column 3: Vertical line
+                {false, false, false, true, false}   // Column 4: Crossbar extension
             },
             // 5
             {
-                {true, true, true, true, true},     // Column 0: Top bar + Left down + Bot curve
-                {true, false, true, false, true},   // Column 1: Top bar + Mid + Bot
-                {true, false, true, false, true},   // Column 2: Top bar + Mid + Bot
-                {true, false, true, false, true},   // Column 3: Top bar + Mid + Bot
-                {true, false, false, true, true}    // Column 4: Top start + Bot curve
+                {true, true, true, true, true},      // Column 0: Left vertical
+                {true, false, true, false, true},    // Column 1: Top bar + middle + bottom
+                {true, false, true, false, true},    // Column 2: Top bar + middle + bottom
+                {true, false, false, false, true},   // Column 3: Top bar + bottom
+                {true, false, false, true, false}    // Column 4: Top + bottom curve
             },
             // 6
             {
-                {false, true, true, true, false},   // Column 0: Left spine
-                {true, false, true, false, true},   // Column 1: Top/Bot curves
-                {true, false, true, false, true},   // Column 2: Mid/Bot curves
-                {true, false, true, false, true},   // Column 3: Mid/Bot curves
-                {false, true, false, false, false}  // Column 4: Top loop closer
+                {false, true, true, true, false},    // Column 0: Left curve
+                {true, false, true, false, true},    // Column 1: Top gap + middle + bottom
+                {true, false, true, false, true},    // Column 2: Top gap + middle + bottom
+                {true, false, true, false, true},    // Column 3: Top gap + middle + bottom
+                {false, false, false, true, false}   // Column 4: Bottom curve
             },
             // 7
             {
-                {true, false, false, false, false}, // Column 0: Top bar
-                {true, false, false, false, false}, // Column 1: Top bar
-                {true, false, false, true, false},  // Column 2: Top bar + Diagonal
-                {true, false, true, false, false},  // Column 3: Top bar + Diagonal
-                {true, true, false, false, false}   // Column 4: Top bar + Diagonal start
+                {true, false, false, false, false},  // Column 0: Top bar
+                {true, false, false, false, false},  // Column 1: Top bar
+                {true, false, false, true, true},    // Column 2: Top bar + diagonal
+                {true, false, true, false, false},   // Column 3: Top bar + diagonal
+                {true, true, false, false, false}    // Column 4: Top bar + diagonal
             },
             // 8
             {
-                {false, true, true, true, false},   // Column 0: Left curves
-                {true, false, true, false, true},   // Column 1: Top/Mid/Bot
-                {true, false, true, false, true},   // Column 2: Top/Mid/Bot
-                {true, false, true, false, true},   // Column 3: Top/Mid/Bot
-                {false, true, true, true, false}    // Column 4: Right curves
+                {false, true, true, true, false},    // Column 0: Left curves
+                {true, false, true, false, true},    // Column 1: Top/middle/bottom gaps
+                {true, false, true, false, true},    // Column 2: Top/middle/bottom gaps
+                {true, false, true, false, true},    // Column 3: Top/middle/bottom gaps
+                {false, true, true, true, false}     // Column 4: Right curves
             },
             // 9
             {
-                {false, false, true, true, false},  // Column 0: Left top curve
-                {true, false, true, false, true},   // Column 1: Top/Mid
-                {true, false, true, false, true},   // Column 2: Top/Mid
-                {true, false, true, false, true},   // Column 3: Top/Mid
-                {false, true, true, true, false}    // Column 4: Right spine
+                {false, true, false, false, false},  // Column 0: Top curve
+                {true, false, true, false, true},    // Column 1: Top + middle + bottom
+                {true, false, true, false, true},    // Column 2: Top + middle + bottom
+                {true, false, true, false, true},    // Column 3: Top + middle + bottom
+                {false, true, true, true, false}     // Column 4: Right vertical
             },
             // !
             {
