@@ -164,7 +164,7 @@ void Pov::displayPov() {
     bool messageComplete = false;
 
     this->completionCounter =0;
-    while (!this->messageComplete) {
+    while (!messageComplete) {
         if(this->messagePending) {
             prepareWholeMessage();
             messageLen = this->messageIndexs.size();
