@@ -14,6 +14,7 @@ private:
     uint32_t rowMasks[5]; 
     uint8_t windowSize;
     bool looping;
+    uint8_t completionCounter;
     bool messageComplete;
     bool shouldStop;
     const bool alpha[39][5][5] = {

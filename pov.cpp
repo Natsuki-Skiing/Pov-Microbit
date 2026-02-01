@@ -32,6 +32,7 @@ Pov::Pov(std::string message) :  messagePending(false) {
     uBit.display.disable();
     this-> windowSize = 20;
     this-> looping = false;
+    
     updateMessage(message);
 
     rowMasks[0] = (1u << ROW_1);
@@ -98,6 +99,7 @@ void Pov::updateMessage(std::string s) {
     this->messageIndexs.clear();
     getAlphaIndexes(Cmessage, s.length());
     this->messagePending = true;
+    this->completionCounter = 0;
 }
 
 void Pov::clearLEDS() {
@@ -160,6 +162,8 @@ void Pov::displayPov() {
     int8_t noShakes = 0;
     //Used for new non looping mode
     bool messageComplete = false;
+
+    this->completionCounter =0;
     while (!this->messageComplete) {
         if(this->messagePending) {
             prepareWholeMessage();
@@ -167,7 +171,7 @@ void Pov::displayPov() {
             msgNumberOfCols = wholeMessage.size();
             windowStart = 0;
             noShakes = 0;
-            completionCounter = 0;
+            this->completionCounter = 0;
         }
         
         int16_t x = uBit.accelerometer.getX();
@@ -221,9 +225,9 @@ void Pov::displayPov() {
         if(noShakes >= SHAKES_MOVE_WIN && messageLen>3){
             windowStart = (windowStart+1) % msgNumberOfCols;
             if(!this->looping){
-                completionCounter ++;
+                this->completionCounter ++;
                 // Check if message completed full cycle non looping
-                if(windowStart == 0 && completionCounter > 0) {
+                if(windowStart == 0 && this->completionCounter > 0) {
                     messageComplete = true;
                 }
             }

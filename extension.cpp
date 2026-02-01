@@ -8,7 +8,7 @@ using namespace codal;
 namespace shakeScreen{ 
     static Pov* povInstance = nullptr;
     static bool looping = false;  // Default OFF
-    
+    //%
     //%
     void povStopMessage(){
         if(povInstance){
