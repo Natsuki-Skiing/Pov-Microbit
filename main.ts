@@ -1,1 +1,1 @@
-
+shakeScreen.showMessage("Hi")

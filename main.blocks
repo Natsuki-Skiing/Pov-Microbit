@@ -1,1 +1,1 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><variables></variables></xml>
+<xml xmlns="https://developers.google.com/blockly/xml"><variables></variables><block type="pxt-on-start" id="1Z)fv(%UPa=j8rKtdB,h" x="0" y="0"><statement name="HANDLER"><block type="shakeScreen_showMessage" id="5oC2iE,3Bc%b%_s=|-,Q"><value name="message"><shadow type="text" id="7NK.,qZ`O?7=3k=v[SJ_"><field name="TEXT">Hi</field></shadow></value></block></statement></block></xml>

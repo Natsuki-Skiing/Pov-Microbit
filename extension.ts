@@ -14,7 +14,9 @@ namespace shakeScreen {
     //% weight=100
     //% group="Screen Control"
     export function showMessage(message: string): void {
+        console.log("showMessage");
         povShowMessage(message);
+        return;
     }
 
     /**
@@ -26,19 +28,24 @@ namespace shakeScreen {
     //% weight=90
     //% group="Screen Control"
     export function showNumber(number:number): void {
+        console.log("Show number");
         povShowMessage(number.toString());
+        return;
     }
     //% block="Stop"
     //% weight=50
     //% group="Screen Control"
     export function stopMessage(): void {
+        console.log("Stop");
         povStopMessage();
+        return;
     }
 
     //% block="looping enabled"
     //% weight=40
     //% group="Attributes"
     export function isLooping(): boolean {
+        console.log("Get looping");
         return povIsLooping();
     }
     //% block="set looping $enabled"
@@ -47,7 +54,9 @@ namespace shakeScreen {
     //% weight=50
     //% group="Settings"
     export function setLooping(enabled: boolean): void {
+        console.log("Set Looping");
         povSetLooping(enabled);
+        return;
     }
 
     //% block="Set number of Characters $numberLetter"
@@ -56,13 +65,16 @@ namespace shakeScreen {
     //% numberLetter.min=2 numberLetter.max=10
     //% numberLetter.defl=3
     export function setNumberOfCharacters(numberLetter:number):void{
+        console.log("Set Characters");
         povSetNumberOfCharacters(numberLetter);
+        return;
     }
     //% block="Number of Characters"
     //% weight= 10
     //% group="Attributes"
     export function getNumberOfCharacters():number{
         //Place Holder
+        console.log("Get number of characters");
         return(povGetNumberOfCharacters());
     }
 
@@ -70,15 +82,21 @@ namespace shakeScreen {
     //% weight=0
     //% group="Attributes"
     export function getRunning(): boolean {
+        console.log("Get running");
         return(povIsRunning());
     }
     
-    // //% block="Looping on"
-    // //% weight=0
-    // //% group="Attributes"
-    // export function getLooping(): boolean {
-    //     return (povIsLooping());
-    // }
+    //% shim=shakeScreen::povShowMessage
+    function povShowMessage(message: string): void {
+        console.log("Simulator: povShowMessage -> " + message);
+        return;
+    }
+
+    //% shim=shakeScreen::povUpdateMessage
+    function povUpdateMessage(message: string): void {
+        console.log("Simulator: povUpdateMessage -> " + message);
+        return;
+    }
 
 
     

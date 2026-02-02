@@ -2,7 +2,8 @@
     "name": "pxt-extension",
     "description": "",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "audio-recording": "*"
     },
     "files": [
         "main.blocks",
